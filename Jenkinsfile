@@ -10,7 +10,7 @@ pipeline {
    agent any
 
     stages {
-        stage('pull repository ke github') {
+        stage('pull repository dari github') {
             steps {
                 sshagent([credential]){
                     sh"""
