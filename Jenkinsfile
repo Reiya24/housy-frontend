@@ -13,8 +13,7 @@ pipeline {
         stage('pull repository ke github') {
             steps {
                 sshagent([credential]){
-                    sh
-                    """
+                    sh"""
                     ssh -o StrictHostKeyChecking=no ${server} << EOF
                     echo "Pulling Housy frontend Repository"
                     cd ${dir}
@@ -22,8 +21,7 @@ pipeline {
                     docker container rm ${nama_container}
                     git pull ${nama_repository} ${branch}
                     exit
-                    EOF
-                    """
+                    EOF"""
                 }
             }
         }
@@ -31,14 +29,12 @@ pipeline {
         stage('build image frontend') {
             steps {
                 sshagent([credential]){
-                    sh
-                    """ssh -o StrictHostKeyChecking=no ${server} << EOF
+                    sh"""ssh -o StrictHostKeyChecking=no ${server} << EOF
                     echo "Building Image"
                     cd ${dir}
                     docker build -t ${docker_image}:latest .
                     exit
-                    EOF
-                    """
+                    EOF"""
                 }
             }
         }
