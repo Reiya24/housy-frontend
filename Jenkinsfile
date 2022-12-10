@@ -42,8 +42,7 @@ pipeline {
         stage('jalankan docker compose') {
             steps {
                 sshagent([credential]){
-                    sh
-                    """ssh -o StrictHostKeyChecking=no ${server} << EOF
+                    sh"""ssh -o StrictHostKeyChecking=no ${server} << EOF
                     cd ${dir}
                     docker compose -f docker-compose.yaml up -d
                     exit
@@ -56,13 +55,12 @@ pipeline {
         stage('push image ke dockerhub') {
             steps {
                 sshagent([credential]){
-                    sh """
+                    sh"""
                     ssh -o StrictHostKeyChecking=no ${server} << EOF
                     cd ${dir}
                     docker image push ${docker_image}:latest
                     exit
-                    EOF
-                    """
+                    EOF"""
                 }
             }
         }
