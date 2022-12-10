@@ -44,7 +44,7 @@ pipeline {
                 sshagent([credential]){
                     sh"""ssh -o StrictHostKeyChecking=no ${server} << EOF
                     cd ${dir}
-                    docker compose -f docker-compose.yaml up -d
+                    docker compose -f docker-compose.yml up -d
                     exit
                     EOF
                     """
